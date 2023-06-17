@@ -4,6 +4,9 @@ const http = require("http");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/users");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
+// const customCss = fs.readFileSync((process.cwd()+"/swagger.css"), 'utf8');
 
 dotenv.config();
 
@@ -19,7 +22,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 const uri =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/content_platform_app";
+  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/content-platform-app";
 
 mongoose.set("strictQuery", false);
 mongoose
@@ -33,6 +36,8 @@ mongoose
   .catch((err) => {
     console.log("Unable to connect to Database.", err);
   });
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/user", userRoutes);
 
