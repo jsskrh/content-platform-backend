@@ -4,6 +4,7 @@ const http = require("http");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/users");
+const creatorPageRoutes = require("./routes/page");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 // const customCss = fs.readFileSync((process.cwd()+"/swagger.css"), 'utf8');
@@ -40,5 +41,6 @@ mongoose
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/user", userRoutes);
+app.use("/api/creator/pages", creatorPageRoutes);
 
 module.exports = app;

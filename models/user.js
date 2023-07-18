@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema(
     },
     balance: {
       type: mongoose.Decimal128,
-      required: true,
+      // required: true,
       default: 0.0,
     },
     avatar: {
