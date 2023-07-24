@@ -8,6 +8,6 @@ const auth = require("../middleware/index");
 router.post("/", auth.authToken, auth.isCreator, Posts.createPost);
 router.get("/", auth.authToken, Posts.getPosts);
 router.get("/:postId", auth.authToken, Posts.getPost);
-router.delete("/:postId", auth.authToken, created, Posts.deletePost);
+router.delete("/:postId", auth.authToken, auth.created, Posts.deletePost);
 
 module.exports = router;
