@@ -4,7 +4,8 @@ const http = require("http");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/users");
-const creatorPageRoutes = require("./routes/page");
+const postRoutes = require("./routes/posts");
+const membershipRoutes = require("./routes/tiers");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 // const customCss = fs.readFileSync((process.cwd()+"/swagger.css"), 'utf8');
@@ -41,6 +42,7 @@ mongoose
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/user", userRoutes);
-app.use("/api/creator/pages", creatorPageRoutes);
+app.use("/api/post", postRoutes);
+app.use("/api/membership", membershipRoutes);
 
 module.exports = app;

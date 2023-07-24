@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Content Platfom API",
+    "title": "Content Platform API",
     "version": "1.0.0",
     "description": "API for the content platform"
   },
@@ -168,11 +168,11 @@
         }
       }
     },
-    "/api/creator/pages": {
-      "post": {
-        "summary": "Create a new page",
-        "operationId": "createPage",
-        "tags": ["Creator Pages"],
+    "/api/user/profile/avatar": {
+      "put": {
+        "summary": "Update user avatar",
+        "operationId": "updateUserAvatar",
+        "tags": ["User"],
         "security": [
           {
             "bearerAuth": []
@@ -183,18 +183,28 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Page"
+                "$ref": "#/components/schemas/UserAvatarUpdate"
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Page created successfully",
+            "description": "User description updated successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -220,19 +230,213 @@
             }
           }
         }
-      },
-      "get": {
-        "summary": "Get all pages of the creator",
-        "operationId": "getPages",
-        "tags": ["Creator Pages"],
+      }
+    },
+    "/api/user/profile/description": {
+      "put": {
+        "summary": "Update user description",
+        "operationId": "updateUserDescription",
+        "tags": ["User"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDescriptionUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User description updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/payment": {
+      "put": {
+        "summary": "Update user payment information",
+        "operationId": "updatePaymentInfo",
+        "tags": ["User"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserPaymentUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User payment information updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/password": {
+      "put": {
+        "summary": "Update user password",
+        "operationId": "updatePassword",
+        "tags": ["User"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserPasswordUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User password updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/deactivate": {
+      "put": {
+        "summary": "Deactivate user account",
+        "operationId": "deactivateAccount",
+        "tags": ["User"],
         "security": [
           {
             "bearerAuth": []
           }
         ],
         "responses": {
-          "200": {
-            "description": "Pages fetched successfully",
+          "201": {
+            "description": "User account deactivated successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -264,33 +468,70 @@
         }
       }
     },
-    "/api/creator/pages/{id}": {
+    "/api/post": {
       "get": {
-        "summary": "Get a specific page of the creator",
-        "operationId": "getPage",
-        "tags": ["Creator Pages"],
+        "summary": "Get all posts",
+        "operationId": "getAllPosts",
+        "tags": ["Posts"],
+        "responses": {
+          "200": {
+            "description": "List of all posts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostsResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new post",
+        "operationId": "createPost",
+        "tags": ["Posts"],
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostData"
+              }
             }
           }
-        ],
+        },
         "responses": {
-          "200": {
-            "description": "Page fetched successfully",
+          "201": {
+            "description": "Post created successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -316,11 +557,61 @@
             }
           }
         }
+      }
+    },
+    "/api/post/{postId}": {
+      "get": {
+        "summary": "Get a post by ID",
+        "operationId": "getPostById",
+        "tags": ["Posts"],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the post to retrieve",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
       },
-      "put": {
-        "summary": "Update a specific page of the creator",
-        "operationId": "updatePage",
-        "tags": ["Creator Pages"],
+      "delete": {
+        "summary": "Delete a post",
+        "operationId": "deletePost",
+        "tags": ["Posts"],
         "security": [
           {
             "bearerAuth": []
@@ -328,9 +619,166 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "postId",
             "in": "path",
             "required": true,
+            "description": "ID of the post to delete",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/membership": {
+      "get": {
+        "summary": "Get all memberships",
+        "operationId": "getAllMemberships",
+        "tags": ["Memberships"],
+        "responses": {
+          "200": {
+            "description": "List of all memberships",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipsResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new tier",
+        "operationId": "createMmbership",
+        "tags": ["Memberships"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Membership created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/membership/{membershipId}": {
+      "put": {
+        "summary": "Update a membership",
+        "operationId": "updateMembership",
+        "tags": ["Memberships"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the membership to update",
             "schema": {
               "type": "string"
             }
@@ -341,24 +789,107 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Page"
+                "$ref": "#/components/schemas/MembershipUpdateData"
               }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": "Page updated successfully",
+          "200": {
+            "description": "Membership updated successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
+                  "$ref": "#/components/schemas/MembershipResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           },
           "401": {
             "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Membership not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a membership",
+        "operationId": "deleteMembership",
+        "tags": ["Memberships"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the membership to delete",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Membership deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MembershipResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Membership not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -461,9 +992,13 @@
           "phoneNumber": {
             "type": "string"
           },
-          "bio": {
-            "type": "string"
+          "description": {
+            "videoUrl": {
+              "type": "string"
+            },
+            "bio": { "type": "string" }
           },
+          "membership": { "type": "array" },
           "userToken": {
             "type": "string"
           },
@@ -498,49 +1033,184 @@
           }
         }
       },
-      "Page": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT",
+          "in": "header",
+          "name": "Authorization",
+          "description": "Bearer Token"
+        }
+      },
+      "UserUpdate": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "required": true
-          },
-          "balance": {
-            "type": "number",
-            "default": 0.0
-          },
-          "avatar": {
+          "firstName": {
             "type": "string"
           },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          }
+        }
+      },
+      "UserDescriptionUpdate": {
+        "type": "object",
+        "properties": {
           "bio": {
             "type": "string"
           },
-          "userBank": {
+          "videoUrl": {
             "type": "string"
-          },
-          "accountNumber": {
-            "type": "string"
-          },
-          "isDisabled": {
-            "type": "boolean",
-            "default": false
-          },
-          "isDeactivated": {
-            "type": "boolean",
-            "default": false
           }
-        },
-        "required": ["name"]
-      }
-    },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT",
-        "in": "header",
-        "name": "Authorization",
-        "description": "Bearer Token"
+        }
+      },
+      "UserAvatarUpdate": {
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "type": "string"
+          }
+        }
+      },
+      "UserPaymentUpdate": {
+        "type": "object",
+        "properties": {
+          "oldAccountNumber": {
+            "type": "string"
+          },
+          "newAccountNumber": {
+            "type": "string"
+          },
+          "bank": {
+            "type": "string"
+          }
+        }
+      },
+      "UserPasswordUpdate": {
+        "type": "object",
+        "properties": {
+          "newPassword": {
+            "type": "string"
+          }
+        }
+      },
+      "PostsResponse": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/PostData"
+        }
+      },
+      "PostData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "creator": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "viewers": {
+            "type": "string"
+          },
+          "tier": {
+            "type": "string"
+          },
+          "earlyAccess": {
+            "type": "boolean"
+          },
+          "textPreview": {
+            "type": "string"
+          }
+        }
+      },
+      "PostResponse": {
+        "type": "object",
+        "properties": {
+          "post": {
+            "$ref": "#/components/schemas/PostData"
+          }
+        }
+      },
+      "PostUpdateData": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
+        }
+      },
+      "MembershipsResponse": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/MembershipData"
+        }
+      },
+      "MembershipData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "creator": {
+            "type": "string"
+          },
+          "subscribers": {
+            "type": "array"
+          }
+        }
+      },
+      "MembershipResponse": {
+        "type": "object",
+        "properties": {
+          "membership": {
+            "$ref": "#/components/schemas/MembershipData"
+          }
+        }
+      },
+      "MembershipUpdateData": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
       }
     },
     "security": [

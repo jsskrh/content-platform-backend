@@ -138,6 +138,46 @@ const getUser = async (req, res) => {
   }
 };
 
+const updateAvatar = async (req, res) => {
+  const { imageUrl } = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { avatar: imageUrl },
+      { new: true }
+    );
+
+    return res.status(201).json({
+      status: true,
+      message: "Page created successfully",
+      data: user,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ error: "Server error" });
+  }
+};
+
+const updateDescription = async (req, res) => {
+  const { videoUrl, bio } = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { description: { videoUrl, bio } },
+      { new: true }
+    );
+
+    return res.status(201).json({
+      status: true,
+      message: "Page created successfully",
+      data: user,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ error: "Server error" });
+  }
+};
+
 const updateUserInfo = async (req, res) => {
   const {
     isDeactivated,
@@ -287,6 +327,8 @@ module.exports = {
   createUser,
   loginUser,
   getUser,
+  updateAvatar,
+  updateDescription,
   updateUserInfo,
   updatePaymentInfo,
   updatePassword,

@@ -49,9 +49,13 @@ const userSchema = new mongoose.Schema(
     avatar: {
       type: String,
     },
-    bio: {
-      type: String,
+    description: {
+      videoUrl: { type: String },
+      bio: {
+        type: String,
+      },
     },
+    membership: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tier" }],
     // reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
     // notifications: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
     userBank: {

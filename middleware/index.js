@@ -41,6 +41,47 @@ function authToken(req, res, next) {
   return next();
 }
 
+async function isCreator(req, res, next) {
+  try {
+    const user = await User.findById(req.user.id);
+    if (user.userType === "creator") {
+      return next();
+    } else {
+      return res.status(401).json({
+        status: false,
+        message: "You are not authorized",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: "Server error",
+    });
+  }
+}
+
+async function created(req, res, next) {
+  try {
+    const post = await Post.findOne({
+      _id: req.params.postId,
+      creator: req.user.id,
+    });
+    if (post) {
+      return next();
+    } else {
+      return res.status(401).json({
+        status: false,
+        message: "You are not authorized",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: "Server error",
+    });
+  }
+}
+
 async function passwordCheck(req, res, next) {
   const { password } = req.body;
   try {
@@ -82,6 +123,8 @@ async function isAdmin(req, res, next) {
 
 module.exports = {
   authToken,
+  isCreator,
+  created,
   passwordCheck,
   isAdmin,
 };
