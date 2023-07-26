@@ -123,7 +123,7 @@ const getUser = async (req, res) => {
       lastName: user.lastName,
       email: user.email,
       userType: user.userType,
-      bio: user.bio,
+      description: user.description,
       phoneNumber: user.phoneNumber,
       country: user.country,
       balance: user.balance,
