@@ -48,10 +48,14 @@ const editTier = async (req, res) => {
   try {
     const { price, description } = req.body;
 
-    const tier = await Tier.findByIdAndUpdate(req.params.tierId, {
-      price,
-      description,
-    });
+    const tier = await Tier.findByIdAndUpdate(
+      req.params.tierId,
+      {
+        price,
+        description,
+      },
+      { new: true }
+    );
 
     return res.status(201).json({
       status: true,
