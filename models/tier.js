@@ -4,7 +4,7 @@ const tierSchema = new mongoose.Schema(
   {
     price: { type: mongoose.Decimal128, required: true },
     description: { type: String, required: true },
-    subscribers: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    subscribers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }

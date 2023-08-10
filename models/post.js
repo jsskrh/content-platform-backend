@@ -24,7 +24,7 @@ const postSchema = new mongoose.Schema(
     viewers: {
       type: String,
       default: "public",
-      enum: ["public", "patreons", "tier"],
+      enum: ["public", "subscribers", "tier"],
       trim: true,
     },
     tier: {

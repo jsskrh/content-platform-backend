@@ -14,6 +14,7 @@ const createPost = async (req, res) => {
       data: result,
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
       status: true,
       message: `Unable to create post. Please try again. \n Error: ${err}`,

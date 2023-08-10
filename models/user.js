@@ -36,10 +36,12 @@ const userSchema = new mongoose.Schema(
     userType: {
       type: String,
       required: true,
+      enum: ["creator", "viewer"],
     },
     role: {
       type: String,
       default: "user",
+      enum: ["user", "admin"],
     },
     balance: {
       type: mongoose.Decimal128,
@@ -47,6 +49,9 @@ const userSchema = new mongoose.Schema(
       default: 0.0,
     },
     avatar: {
+      type: String,
+    },
+    header: {
       type: String,
     },
     description: {

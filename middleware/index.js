@@ -44,6 +44,7 @@ function authToken(req, res, next) {
 async function isCreator(req, res, next) {
   try {
     const user = await User.findById(req.user.id);
+    console.log(user);
     if (user.userType === "creator") {
       return next();
     } else {
